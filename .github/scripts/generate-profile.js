@@ -5,6 +5,7 @@
 const QUERY = `
 query ($login: String!) {
   user(login: $login) {
+    login
     name
     createdAt
     repositories(first: 100, ownerAffiliations: OWNER, orderBy: {field: STARGAZERS, direction: DESC}) {
@@ -113,6 +114,8 @@ function processData(user) {
     }));
 
   return {
+    login: user.login,
+    name: user.name || user.login,
     stats: { totalStars, totalForks, totalRepos, totalCommits },
     languages,
     topProjects,
@@ -220,12 +223,12 @@ function generateSVG(data) {
       <circle class="g-dot" cx="60" cy="${cy-65}" r="2" fill="#7ee7ff"/>
       <circle class="g-dot" cx="740" cy="${cy+45}" r="2" fill="#e8c8ff" style="animation-delay:1.5s"/>
       <circle class="g-dot" cx="700" cy="${cy-50}" r="1.5" fill="#ff88cc" style="animation-delay:2.5s"/>
-      <text x="400" y="${cy-48}" text-anchor="middle" font-family="${font}" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="20" filter="url(#glow)">ACE</text>
-      <text x="400" y="${cy-8}" text-anchor="middle" font-family="${font}" font-size="11" fill="rgba(126,231,255,0.9)" letter-spacing="6" font-weight="700">SYSTEMS PROGRAMMER</text>
+      <text x="400" y="${cy-48}" text-anchor="middle" font-family="${font}" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="20" filter="url(#glow)">ADONIS</text>
+      <text x="400" y="${cy-8}" text-anchor="middle" font-family="${font}" font-size="11" fill="rgba(126,231,255,0.9)" letter-spacing="6" font-weight="700">SOFTWARE ENGINEER</text>
       <line x1="260" y1="${cy+10}" x2="540" y2="${cy+10}" stroke="rgba(126,231,255,0.25)" stroke-width="1" filter="url(#glow)"/>
-      <text x="400" y="${cy+35}" text-anchor="middle" font-family="${font}" font-size="10" fill="rgba(232,200,255,0.8)" letter-spacing="3" font-weight="600">PERFORMANCE ENGINEER  |  OSDEV</text>
-      <text x="400" y="${cy+60}" text-anchor="middle" font-family="${font}" font-size="9.5" fill="rgba(126,231,255,0.6)" letter-spacing="2" font-weight="500">x86/ARM INTERNALS  \u2022  BARE-METAL  \u2022  SoC VALIDATION</text>
-      <text x="400" y="${cy+85}" text-anchor="middle" font-family="${font}" font-size="9" fill="rgba(100,100,140,0.5)" letter-spacing="1.5">github.com/acedmicabhishek</text>
+      <text x="400" y="${cy+35}" text-anchor="middle" font-family="${font}" font-size="10" fill="rgba(232,200,255,0.8)" letter-spacing="3" font-weight="600">SOFTWARE ENGINEER | AI AUTOMATION</text>
+      <text x="400" y="${cy+60}" text-anchor="middle" font-family="${font}" font-size="9.5" fill="rgba(126,231,255,0.6)" letter-spacing="2" font-weight="500">PYTHON \u2022 BACKEND \u2022 API DEVELOPMENT</text>
+      <text x="400" y="${cy+85}" text-anchor="middle" font-family="${font}" font-size="9" fill="rgba(100,100,140,0.5)" letter-spacing="1.5">github.com/TRON127</text>
     </g>`;
   })();
   y += heroH + gap;
@@ -233,7 +236,7 @@ function generateSVG(data) {
   // ═══════════════ TECH STACK ═══════════════
   const techStack = (() => {
     const baseY = y;
-    const techs = ['C', 'C++', 'x86 ASM', 'Python', 'JavaScript', 'Rust', 'GLSL', 'OpenGL'];
+    const techs = ['Python', 'JavaScript', 'SQL', 'FastAPI', 'Aiogram', 'PostgreSQL', 'Git', 'Linux'];
     const colors = ['#7ee7ff', '#e8c8ff', '#ff88cc', '#7ee7ff', '#e8c8ff', '#ff88cc', '#e8c8ff', '#7ee7ff'];
     let pills = '';
     // Calculate total width first to center them
@@ -466,23 +469,46 @@ function mockData() {
     weeks.push({ contributionDays: days });
   }
   return {
+    login: 'TRON127',
+    name: 'TRON127',
     stats: { totalStars: 12, totalForks: 5, totalRepos: 24, totalCommits: 847 },
     languages: [
-      { name: 'C++', color: '#f34b7d', percentage: 35 },
-      { name: 'C', color: '#555555', percentage: 14 },
-      { name: 'Python', color: '#3572A5', percentage: 11 },
-      { name: 'CSS', color: '#663399', percentage: 11 },
-      { name: 'GLSL', color: '#5686a5', percentage: 5 },
-      { name: 'Shell', color: '#89e051', percentage: 5 },
-      { name: 'Assembly', color: '#6E4C13', percentage: 5 },
-      { name: 'TypeScript', color: '#3178c6', percentage: 3 },
-      { name: 'HTML', color: '#e34c26', percentage: 3 },
-      { name: 'JavaScript', color: '#f1e05a', percentage: 3 },
+      { name: 'Python', color: '#3572A5', percentage: 35 },
+      { name: 'JavaScript', color: '#f1e05a', percentage: 20 },
+      { name: 'SQL', color: '#4479a1', percentage: 15 },
+      { name: 'FastAPI', color: '#663399', percentage: 11 },
+      { name: 'Aiogram', color: '#5686a5', percentage: 5 },
+      { name: 'PostgreSQL', color: '#336791', percentage: 5 },
+      { name: 'Git', color: '#6E4C13', percentage: 5 },
+      { name: 'Linux', color: '#3178c6', percentage: 3 },
+      { name: 'Web Scraping', color: '#e34c26', percentage: 3 },
+      { name: 'AI Integration', color: '#5686a5', percentage: 3 },
     ],
     topProjects: [
-      { name: 'BrainDance OS', desc: 'Custom x86 operating system with memory management and multitasking', stars: 8, forks: 2, lang: 'C', langColor: '#555555' },
-      { name: 'CAT', desc: 'LLVM-based compiler architecture toolkit for ARM/RISC-V backends', stars: 4, forks: 1, lang: 'C++', langColor: '#f34b7d' },
-      { name: 'Calcium 3D', desc: 'Real-time software renderer with vertex pipeline and rasterization', stars: 3, forks: 0, lang: 'C++', langColor: '#f34b7d' },
+      {
+        name: 'Kino AI Bot',
+        desc: 'AI-powered Telegram bot that identifies movies from short video clips and provides detailed movie information.',
+        stars: 12,
+        forks: 3,
+        lang: 'Python',
+        langColor: '#3572A5'
+      },
+      {
+        name: 'Media Downloader',
+        desc: 'Telegram bot for downloading videos and media from Instagram, TikTok, YouTube, and other platforms.',
+        stars: 8,
+        forks: 2,
+        lang: 'Python',
+        langColor: '#3572A5'
+      },
+      {
+        name: 'Scam Detector',
+        desc: 'AI-assisted system for detecting scam messages, suspicious links, and fraudulent online activities.',
+        stars: 5,
+        forks: 1,
+        lang: 'Python',
+        langColor: '#3572A5'
+      }
     ],
     calendar: { totalContributions: 847, weeks },
   };
